@@ -4,6 +4,7 @@ const app = express()
 // 中间件
 app.use(express.json())
 app.use(require('cors')())
+app.use('/uploads', express.static(__dirname + '/uploads'))
 
 // admin路由
 require('./routes/admin')(app)

@@ -5,14 +5,14 @@
       <el-menu router :default-openeds="['1', '2', '3']">
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>分类管理</template>
-          <el-menu-item index="/categories/edit">新建分类</el-menu-item>
+          <el-menu-item index="/categories/create">新建分类</el-menu-item>
           <el-menu-item index="/categories/list">分类列表</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
-          <template slot="title"><i class="el-icon-menu"></i></template>
+          <template slot="title"><i class="el-icon-menu"></i>物品管理</template>
           <el-menu-item-group>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
+            <el-menu-item index="/items/create">新建物品</el-menu-item>
+            <el-menu-item index="/items/list">物品列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
