@@ -45,6 +45,7 @@ export default {
     },
     async fetchParents() {
       const res = await this.$http.get('/rest/categories')
+      // 过滤出没有父级的分类
       this.parents = res.data.filter((item) => !item.parent)
     },
     async submit() {

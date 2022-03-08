@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       model: {
-        icon: '',
+        // icon: '',
       },
       rules: {
         name: [
@@ -95,16 +95,16 @@ export default {
   border-color: #409eff;
 }
 .avatar-uploader-icon {
-  font-size: 28px;
+  font-size: 20px;
   color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
   text-align: center;
 }
 .avatar {
-  width: 178px;
-  height: 178px;
+  width: 100px;
+  height: 100px;
   display: block;
 }
 </style>

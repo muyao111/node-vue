@@ -16,10 +16,17 @@
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
-          <template slot="title"><i class="el-icon-setting"></i>导航三</template>
+          <template slot="title"><i class="el-icon-setting"></i>英雄管理</template>
           <el-menu-item-group>
-            <el-menu-item index="3-1">选项1</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
+            <el-menu-item index="/heroes/create">新建英雄</el-menu-item>
+            <el-menu-item index="/heroes/list">英雄列表</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="3">
+          <template slot="title"><i class="el-icon-setting"></i>文章管理</template>
+          <el-menu-item-group>
+            <el-menu-item index="/ariticles/create">新建文章</el-menu-item>
+            <el-menu-item index="/ariticles/list">文章列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
