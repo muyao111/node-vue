@@ -8,9 +8,27 @@ import store from './store'
 import http from './api/http'
 // element-ui
 import './plugins/element.js'
+// 全局css
+import './style.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = http
+
+// 访问不发http请求的接口，即访问新建页面时，允许携带token解决上传图片需要权限问题
+Vue.mixin({
+  computed: {
+    uploadUrl() {
+      return this.$http.defaults.baseURL + '/rupload'
+    },
+  },
+  methods: {
+    getAuthHeaders() {
+      return {
+        Authorization: `Bearer ${localStorage.token || ''}`,
+      }
+    },
+  },
+})
 
 new Vue({
   router,

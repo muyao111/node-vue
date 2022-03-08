@@ -34,8 +34,6 @@ export default {
           { min: 2, max: 6, message: '长度在2-6个字符', trigger: 'blur' },
         ],
       },
-      // 图片上传地址
-      uploadUrl: this.$http.defaults.baseURL + '/upload',
     }
   },
   created() {
@@ -63,7 +61,6 @@ export default {
       this.$router.push('/items/list')
     },
     // 图片上传
-    getAuthHeaders() {},
     beforeUpload(file) {
       const isJPG = file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 2
@@ -82,29 +79,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 20px;
-  color: #8c939d;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-}
-.avatar {
-  width: 100px;
-  height: 100px;
-  display: block;
-}
-</style>

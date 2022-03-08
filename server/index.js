@@ -6,6 +6,9 @@ app.use(express.json())
 app.use(require('cors')())
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
+// 秘钥
+app.set('sercret', 'hnskfhk23j4')
+
 // admin路由
 require('./routes/admin')(app)
 // 数据库

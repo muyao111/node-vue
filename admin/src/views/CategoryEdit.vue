@@ -51,21 +51,15 @@ export default {
     async submit() {
       if (this.id) {
         await this.$http.put(`/rest/categories/${this.id}`, this.model)
-        this.$message({
-          type: 'success',
-          message: '修改成功',
-        })
       } else {
         await this.$http.post('/rest/categories', this.model)
-        this.$message({
-          type: 'success',
-          message: '创建成功',
-        })
       }
+      this.$message({
+        type: 'success',
+        message: '保存成功',
+      })
       this.$router.push('/categories/list')
     },
   },
 }
 </script>
-
-<style></style>

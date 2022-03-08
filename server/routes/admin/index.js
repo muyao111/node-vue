@@ -2,6 +2,17 @@ module.exports = (app) => {
   const express = require('express')
   const router = express.Router()
   const multer = require('multer') // 处理图片上传
+  const jwt = require('jsonwebtoken') // 返回token
+  // const assert = require('http-assert') // 抛出错误
+
+  const AdminUser = require('../../models/AdminUser')
+
+  /************************* 通用crud ****************************/
+
+  // auth 中间件
+  const authMiddleWare = require('../../middleware/auth')
+  // crud 中间件
+  const crudMiddleWare = require('../../middleware/resource')
 
   // create 一条数据
   router.post('/', async (req, res) => {
@@ -15,8 +26,7 @@ module.exports = (app) => {
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent'
     }
-    // const items = await req.Model.find().setOptions(queryOptions).limit(10)
-    const items = await req.Model.find().setOptions(queryOptions)
+    const items = await req.Model.find().setOptions(queryOptions).limit(10)
     res.send(items)
   })
   // retrieve by _id
@@ -37,26 +47,40 @@ module.exports = (app) => {
     })
   })
 
-  // crud 中间件
-  const crudMiddleWare = async (req, res, next) => {
-    const modelName = require('inflection').classify(req.params.resource) // 小写复数 转成 大写单数
-    req.Model = require(`../../models/${modelName}`) // 导入model并挂载到req上
-    next()
-  }
-
   // restful 通用 crud 接口
-  app.use('/admin/api/rest/:resource', crudMiddleWare, router)
+  app.use('/admin/api/rest/:resource', authMiddleWare(), crudMiddleWare(), router)
 
-  /****************************************************************************/
+  /************************* 图片上传 ****************************/
 
   // 图片上传 中间件
   const upload = multer({
     dest: __dirname + './../../uploads', // destination 目标地址
   })
 
-  app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+  app.post('/admin/api/upload', authMiddleWare(), upload.single('file'), async (req, res) => {
     const file = req.file
     file.url = `http://localhost:3000/uploads/${file.filename}`
     res.send(file)
+  })
+
+  /************************* 登录接口 ****************************/
+
+  app.post('/admin/api/login', async (req, res) => {
+    const { username, password } = req.body
+
+    const user = await AdminUser.findOne({ username }).select('+password')
+    if (!user) return res.status(422).send({ message: '用户名不存在！' })
+
+    const isValid = require('bcryptjs').compareSync(password, user.password)
+    if (!isValid) return res.status(422).send({ message: '密码错误！' })
+
+    const token = jwt.sign({ id: user._id }, app.get('sercret'))
+    res.send({ token })
+  })
+
+  /***********/
+
+  app.use(async (err, req, res, next) => {
+    res.status(err.status || 500).send({ message: err.message })
   })
 }
