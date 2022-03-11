@@ -19,12 +19,12 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-          <!-- <el-form-item label="Banner">
-        <el-upload class="avatar-uploader" :action="uploadUrl" :headers="getAuthHeaders()" :show-file-list="false" :on-success="(res) => $set(model, 'banner', res.url)">
-          <img v-if="model.banner" :src="model.banner" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-      </el-form-item> -->
+          <el-form-item label="Banner">
+            <el-upload class="avatar-uploader" :action="uploadUrl" :headers="getAuthHeaders()" :show-file-list="false" :on-success="(res) => $set(model, 'banner', res.url)">
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
           <el-form-item label="类型">
             <el-select v-model="model.categories" multiple>
               <el-option v-for="item in categories" :key="item._id" :label="item.name" :value="item._id" />
@@ -97,6 +97,28 @@
             </el-col>
           </el-row>
         </el-tab-pane>
+        <!-- tab3 -->
+        <el-tab-pane label="最佳搭档" name="partners">
+          <el-button type="primary" size="small" @click="model.partners.push({})">
+            <i class="el-icon-plus" />
+            添加搭档
+          </el-button>
+          <el-row type="flex" style="flex-wrap: wrap">
+            <el-col :md="12" v-for="(partner, i) in model.partners" :key="i">
+              <el-form-item label="搭档名称">
+                <el-select v-model="partner.hero" filterable>
+                  <el-option v-for="item in heroes" :key="item._id" :label="item.name" :value="item._id"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input type="textarea" v-model="partner.desc" />
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" size="small" @click="model.partners.splice(i, 1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
         <el-form-item>
           <el-button type="primary" @click="submit">保存</el-button>
         </el-form-item>
@@ -114,6 +136,7 @@ export default {
     return {
       categories: [], // 分类
       items: [], // 物品
+      heroes: [], // 英雄搭档
       model: {
         name: '', //名称
         avatar: '', // 头像
@@ -133,6 +156,7 @@ export default {
     this.id && this.fetchById() // 如果有id为编辑页面，数据回显
     this.fetchCategories() // 获取分类
     this.fetchItems() // 获取物品
+    this.fetchHeroes() // 获取英雄
   },
   methods: {
     async fetchById() {
@@ -149,6 +173,10 @@ export default {
       const res = await this.$http.get('/rest/items')
       this.items = res.data
     },
+    async fetchHeroes() {
+      const res = await this.$http.get('/rest/heroes')
+      this.heroes = res.data
+    },
     async submit() {
       if (this.id) {
         await this.$http.put(`/rest/heroes/${this.id}`, this.model)
@@ -163,15 +191,11 @@ export default {
     },
     // 图片上传
     beforeUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 2
-      if (!isJPG) {
-        this.$message.error('上传图片只能是 JPG 格式!')
-      }
       if (!isLt2M) {
         this.$message.error('上传图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M
+      return isLt2M
     },
   },
 }

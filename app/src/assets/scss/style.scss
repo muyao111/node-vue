@@ -1,0 +1,194 @@
+@import './variable.scss';
+
+// reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; // 盒子模型
+  outline: none;
+  list-style: none; // ul
+}
+html {
+  font-size: 50px; // 字体基准
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  // line-height: 1.2em; // 行高基准
+  background: #ededed; // 背景基准
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: #999; // 链接选中后颜色
+}
+p {
+  line-height: 1.8em; // p标签行高
+}
+
+// font-size
+@each $key, $val in $font-sizes {
+  .fs-#{$key} {
+    font-size: $val * $base-font-size;
+  }
+}
+// color/background-color
+@each $key, $val in $colors {
+  .color-#{$key} {
+    color: $val;
+  }
+  .bgc-#{$key} {
+    background-color: $val;
+  }
+}
+// text-align
+@each $key in (left, center, right) {
+  .ta-#{$key} {
+    text-align: $key;
+  }
+}
+// 文字溢出
+.text-ellipsis {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+// width / height
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+// flex 布局
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+@each $key, $val in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $val;
+  }
+}
+@each $key, $val in $flex-ai {
+  .ai-#{$key} {
+    align-items: $val;
+  }
+}
+// margin / padding
+@each $k1, $v1 in $spacing-types {
+  @each $k3, $v3 in $spacing-sizes {
+    // m-1: { margin: 0.1rem }
+    .#{$k1}-#{$k3} {
+      #{$v1}: $v3 * $base-spacing-size;
+    }
+    // mx-1: { margin-left: 0.1rem, margin-right: 0.1rem }
+    .#{$k1}x-#{$k3} {
+      #{$v1}-left: $v3 * $base-spacing-size;
+      #{$v1}-right: $v3 * $base-spacing-size;
+    }
+    // my-1: { margin-top: 0.1rem, margin-bottom: 0.1rem }
+    .#{$k1}y-#{$k3} {
+      #{$v1}-top: $v3 * $base-spacing-size;
+      #{$v1}-bottom: $v3 * $base-spacing-size;
+    }
+  }
+  @each $k2, $v2 in $spacing-directions {
+    @each $k3, $v3 in $spacing-sizes {
+      // mt-1: { margin-top: 0.1rem }
+      .#{$k1}#{$k2}-#{$k3} {
+        #{$v1}-#{$v2}: $v3 * $base-spacing-size;
+      }
+    }
+  }
+}
+// border
+@each $k in (top, right, bottom, left) {
+  .b-#{$k} {
+    border-#{$k}: 0.02rem solid $border-color;
+  }
+}
+// 公共样式
+.btn {
+  border: none;
+  border-radius: 0.04rem;
+  font-size: map-get($font-sizes, '10') * $base-font-size;
+}
+.nav {
+  display: flex;
+  .nav-item {
+    border-bottom: 0.04rem solid transparent;
+    padding-bottom: 0.03rem;
+    color: map-get($colors, 'primary');
+    &.active {
+      border-bottom-color: map-get($colors, 'primary');
+    }
+  }
+  &.nav-inverse {
+    .nav-item {
+      border-bottom: 0.07rem solid transparent;
+      padding-bottom: 0.03rem;
+      color: map-get($colors, 'white');
+      &.active {
+        border-bottom-color: map-get($colors, 'white');
+      }
+    }
+  }
+}
+.sprite {
+  background: url(E:/Git-Space/node-vue/app/src/assets/icons/index.png) no-repeat 0 0; // 左上角对齐 750×910
+  background-size: 7.5rem;
+  display: inline-block;
+  &.sprite-news {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 63.546% 15.517%;
+  }
+  &.sprite-story {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 90.483% 15.614%;
+  }
+  &.sprite-mall {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 36.746% 0.924%;
+  }
+  &.sprite-test {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 10.408% 15.517%;
+  }
+  &.sprite-newcome {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 63.546% 15.517%;
+  }
+  &.sprite-glory {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 90.483% 15.614%;
+  }
+  &.sprite-camp {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 36.746% 0.924%;
+  }
+  &.sprite-pub {
+    width: 0.46rem;
+    height: 0.4rem;
+    background-position: 10.408% 15.517%;
+  }
+  &.sprite-arrow {
+    width: 0.2rem;
+    height: 0.2rem;
+    background-position: 38.577% 52.076%;
+  }
+}

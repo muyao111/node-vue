@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
   name: { type: String }, //名称
   avatar: { type: String }, // 头像
+  banner: { type: String }, // banner
   title: { type: String }, // 称号
   // 多个分类 Category
   categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }],
@@ -37,4 +38,4 @@ const schema = new mongoose.Schema({
   ],
 })
 
-module.exports = mongoose.model('Hero', schema)
+module.exports = mongoose.model('Hero', schema, 'heroes')

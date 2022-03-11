@@ -1,0 +1,16 @@
+{
+  "id": "3235534",
+  "name": "王者荣耀",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "17204046",
+      "name": "更多",
+      "font_class": "xianxingtubiaozhizuomoban-25",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    }
+  ]
+}

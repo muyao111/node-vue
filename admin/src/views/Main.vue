@@ -61,12 +61,13 @@
       </el-header>
       <!-- 主体区 -->
       <el-main>
-        <!-- 表格 -->
-        <router-view />
+        <!-- 表格路由 -->
+        <router-view :key="$route.path" />
       </el-main>
     </el-container>
   </el-container>
 </template>
+
 <style>
 .el-header {
   background-color: #b3c0d1;
