@@ -66,7 +66,7 @@
       </div>
     </div>
     <!-- end of nav -->
-    <my-list-card title="新闻资讯" img="icon_08" icon="xianxingtubiaozhizuomoban-25" :categories="newsCats">
+    <my-list-card title="新闻资讯" img="icon_08" :categories="newsCats">
       <template #categories="{ item }">
         <router-link tag="div" :to="`/ariticles/${news._id}`" class="flex ai-center mt-3 mx-1" v-for="(news, i) in item.newsList" :key="i">
           <span class="news-hot fs-10">{{ news.categoryName }}</span>
@@ -76,7 +76,8 @@
       </template>
     </my-list-card>
     <!-- end of news-card -->
-    <my-list-card title="英雄列表" img="icon_08" icon="xianxingtubiaozhizuomoban-25" :showLine="false" :categories="heroCats">
+    <!-- <my-list-card title="英雄列表" img="icon_08" :showLine="false" :categories="heroCats"> -->
+    <my-list-card title="英雄列表" img="icon_08" :categories="heroCats">
       <template #slide>
         <swiper :options="swiperOption">
           <swiper-slide>
@@ -101,9 +102,9 @@
       </template>
     </my-list-card>
     <!-- end of hero-card -->
-    <my-list-card title="精彩视频" img="icon_08" icon="xianxingtubiaozhizuomoban-25"></my-list-card>
+    <my-list-card title="精彩视频" img="icon_08"></my-list-card>
     <!-- end of video-card -->
-    <my-list-card title="百态王者" img="icon_08" icon="xianxingtubiaozhizuomoban-25"></my-list-card>
+    <my-list-card title="百态王者" img="icon_08"></my-list-card>
     <!-- end -->
   </div>
 </template>

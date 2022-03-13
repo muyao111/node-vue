@@ -28,7 +28,6 @@ export default {
     img: { type: String, required: true }, // 标题左侧图标
     icon: { type: String }, // 标题右侧图标
     showLine: { type: Boolean, default: true }, // 是否显示标题下的横线
-    // categories: { type: Array, required: true }, // 分类nav
     categories: { type: Array }, // 分类nav
   },
   data() {

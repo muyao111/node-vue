@@ -29,14 +29,14 @@ $colors: (
   // 链接
   'grey': #f9f9f9,
   'grey1': #999,
-  // 日期
   'grey2': #777,
-  // 标题
   'grey3': #343,
-  'grey4': #212
+  'grey4': #212,
+  // 边框
+  'border': #d4d9de
 );
 // 边框颜色
-$border-color: map-get($colors, 'grey1');
+$border-color: map-get($colors, 'border');
 
 $flex-jc: (
   'start': flex-start,

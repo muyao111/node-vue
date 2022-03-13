@@ -21,7 +21,7 @@ a {
   color: #999; // 链接选中后颜色
 }
 p {
-  line-height: 1.8em; // p标签行高
+  line-height: 1.5em; // p标签行高
 }
 
 // font-size
@@ -120,24 +120,31 @@ p {
   border: none;
   border-radius: 0.04rem;
   font-size: map-get($font-sizes, '10') * $base-font-size;
+  &.btn-lg {
+    padding: 0.16rem;
+    border: 1px solid map-get($colors, 'border');
+    border-radius: 0.1rem;
+    font-size: map-get($font-sizes, '13') * $base-font-size;
+  }
 }
 .nav {
   display: flex;
   .nav-item {
-    border-bottom: 0.04rem solid transparent;
     padding-bottom: 0.03rem;
-    color: map-get($colors, 'primary');
+    color: map-get($colors, 'gery3'); // 未激活是黑色
+    border-bottom: 0.04rem solid transparent; // 未激活是透明色
     &.active {
-      border-bottom-color: map-get($colors, 'primary');
+      color: map-get($colors, 'primary'); // 激活后是主色
+      border-bottom-color: map-get($colors, 'primary'); // 激活后是主色
     }
   }
   &.nav-inverse {
     .nav-item {
-      border-bottom: 0.07rem solid transparent;
       padding-bottom: 0.03rem;
       color: map-get($colors, 'white');
+      border-bottom: 0.07rem solid transparent; // 未激活是透明色
       &.active {
-        border-bottom-color: map-get($colors, 'white');
+        border-bottom-color: map-get($colors, 'white'); // 激活后是白色
       }
     }
   }
