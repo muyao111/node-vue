@@ -4,7 +4,10 @@ const app = express()
 // 中间件
 app.use(express.json())
 app.use(require('cors')())
+// 静态文件托管
 app.use('/uploads', express.static(__dirname + '/uploads'))
+app.use('/admin', express.static(__dirname + '/public/admin'))
+app.use('/', express.static(__dirname + '/public/app'))
 
 // 秘钥
 app.set('sercret', 'hnskfhk23j4')
